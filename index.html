@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario de la Primera Infancia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Diario de la Primera Infancia</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Artículos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="articulos">
+            <article>
+                <h2>Importancia de la Educación Inicial</h2>
+                <p>La educación inicial es crucial para el desarrollo emocional, social y cognitivo de los niños...</p>
+                <button class="read-more" data-title="Importancia de la Educación Inicial" data-content="La educación inicial es crucial para el desarrollo emocional, social y cognitivo de los niños. En esta etapa, los niños empiezan a aprender habilidades fundamentales, como la capacidad de comunicarse con los demás y desarrollar sus habilidades motoras y cognitivas...">Leer más</button>
+            </article>
+            <article>
+                <h2>Etapas del Desarrollo Infantil</h2>
+                <p>El desarrollo infantil se divide en varias etapas, cada una con sus características y desafíos...</p>
+                <button class="read-more" data-title="Etapas del Desarrollo Infantil" data-content="El desarrollo infantil se divide en varias etapas: la etapa prenatal, la infancia, la niñez temprana y la adolescencia. Cada una de estas etapas está marcada por logros clave y desafíos específicos, tanto en el crecimiento físico como en el desarrollo mental y emocional...">Leer más</button>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Diario de la Primera Infancia. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Modal para mostrar el contenido del artículo -->
+    <div id="articleModal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <h2 id="modalTitle"></h2>
+                <p id="modalContent"></p>
+            </div>
+        </div>
+        <button id="closeModal" class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
