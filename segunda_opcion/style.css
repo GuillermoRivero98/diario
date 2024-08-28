@@ -29,6 +29,33 @@ nav a {
     font-size: 1.2em;
 }
 
+/* Estilos para la imagen de inteligencia */
+.intelligence-container {
+    position: relative;
+    max-width: 100%; /* Ajusta el contenedor al máximo ancho posible */
+}
+
+.intelligence-img {
+    width: 100%;
+    height: auto;
+    max-width: 800px; /* Ajusta el tamaño máximo de la imagen */
+    border-radius: 10px;
+}
+
+.intelligence-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.5em; /* Ajusta el tamaño del texto según sea necesario */
+    max-width: 90%;
+}
+
 /* Estilos para la sección de noticias */
 .news-section {
     display: flex;
@@ -45,10 +72,8 @@ nav a {
 .main-news img {
     width: 100%;
     height: auto;
+    max-width: 800px; /* Tamaño máximo para la imagen principal */
     border-radius: 10px;
-    /* Ajuste para que la imagen sea cuadrada */
-    aspect-ratio: 1 / 1; /* Asegura que la imagen sea cuadrada */
-    object-fit: cover; /* Mantiene la proporción dentro del cuadro */
 }
 
 .main-news-content {
@@ -84,28 +109,25 @@ nav a {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 15px; /* Espaciado vertical entre los artículos */
+    margin-left: 20px; /* Espaciado a la izquierda para separar de la imagen */
 }
 
 .news-item {
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    margin-bottom: 20px;
 }
 
 .news-item img {
     width: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    /* Ajuste para que las imágenes sean cuadradas */
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+    height: auto;
+    max-width: 350px; /* Tamaño máximo para las imágenes secundarias */
 }
 
 .news-title {
-    font-size: 1.2em;
-    margin: 0;
+    font-size: 1.1em;
+    margin: 10px 0;
     color: black;
 }
 
