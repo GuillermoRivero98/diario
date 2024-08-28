@@ -1,0 +1,253 @@
+/* Estilos globales */
+body {
+    font-family: 'Georgia', serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #ffc107;
+    color: black;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e0a800;
+}
+
+header .logo img {
+    max-height: 50px;
+}
+
+nav a {
+    margin: 0 15px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Estilos para la sección de noticias */
+.news-section {
+    display: flex;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.main-news {
+    flex: 2;
+    margin-right: 20px;
+    position: relative;
+}
+
+.main-news img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    /* Ajuste para que la imagen sea cuadrada */
+    aspect-ratio: 1 / 1; /* Asegura que la imagen sea cuadrada */
+    object-fit: cover; /* Mantiene la proporción dentro del cuadro */
+}
+
+.main-news-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 0 0 10px 10px; /* Ajusta solo las esquinas inferiores */
+}
+
+.main-news-content h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+.main-news-content p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.main-news-content span {
+    font-size: 0.9em;
+    display: block;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+/* Estilos para las noticias secundarias */
+.side-news {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-item {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.news-item img {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    /* Ajuste para que las imágenes sean cuadradas */
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.news-title {
+    font-size: 1.2em;
+    margin: 0;
+    color: black;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para la sección de artículos destacados */
+.articles-section {
+    padding: 40px 20px;
+    background-color: #fff;
+}
+
+.articles-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+#articles-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.article {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.article img {
+    width: 100%;
+    height: auto;
+}
+
+.article h3 {
+    font-size: 1.8em;
+    margin: 15px;
+    color: #333;
+}
+
+.article p {
+    font-size: 1.2em;
+    margin: 15px;
+    color: #666;
+}
+
+.article small {
+    margin: 15px;
+    color: gray;
+    display: block;
+    font-style: italic;
+}
+
+/* Estilos para la sección de envío de artículos */
+.submit-section {
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+    border-top: 2px solid #e0e0e0;
+}
+
+.submit-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+input, textarea, button {
+    margin-bottom: 15px;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e0a800;
+}
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 1.1em;
+}
