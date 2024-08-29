@@ -31,16 +31,17 @@ nav a {
 
 .news-section {
     display: flex;
+    flex-direction: column;
     padding: 20px;
     background-color: #fff;
     gap: 20px;
 }
 
 .main-news {
-    flex: 3;
-    margin-right: 0px;
+    flex: 1;
     position: relative;
-    max-width: 50%; /* Reducir a la mitad el tamaño */
+    width: 100%;
+    max-width: 100%;
 }
 
 .main-news img {
@@ -57,17 +58,16 @@ nav a {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
     border-radius: 5px;
-    font-size: 1.8em; /* Tamaño del texto ajustado */
-    width: calc(100% - 40px); /* Para que el texto no sobresalga de la imagen */
-    box-sizing: border-box; /* Asegurar que el padding no afecte el ancho */
+    font-size: 1.8em;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
 }
 
-
 .side-news {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    max-width: 100%;
 }
 
 .side-news .news-item {
@@ -106,6 +106,7 @@ footer {
     font-size: 1.1em;
 }
 
+/* Estilos para el pop-up */
 .modal {
     display: none;
     position: fixed;
@@ -127,8 +128,8 @@ footer {
     max-width: 500px;
     border-radius: 10px;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Añade sombra para profundidad */
-    animation: fadeIn 0.5s ease; /* Animación para que aparezca suavemente */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease;
 }
 
 .close {
@@ -162,7 +163,7 @@ input, textarea, button {
 }
 
 input:focus, textarea:focus {
-    border-color: #3498db; /* Cambiar el color del borde al enfocarse */
+    border-color: #3498db;
     outline: none;
 }
 
@@ -172,7 +173,7 @@ button {
     border: none;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s ease; /* Transición suave del color */
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -197,10 +198,59 @@ label {
     }
 }
 
+/* Media Queries para hacer la página responsiva */
+@media (min-width: 769px) {
+    .news-section {
+        flex-direction: row;
+    }
 
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+    .main-news {
+        flex: 3;
+    }
+
+    .side-news {
+        flex: 1;
+        max-width: 35%;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-news {
+        max-width: 100%;
+    }
+
+    .side-news {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .side-news .news-item {
+        flex-basis: 48%;
+    }
+
+    .main-news .news-title {
+        font-size: 1.5em;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .side-news .news-item {
+        flex-basis: 100%;
+    }
+
+    nav a {
+        font-size: 0.9em;
+    }
+
+    .main-news .news-title {
+        font-size: 1.2em;
+    }
 }
