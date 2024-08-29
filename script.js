@@ -176,4 +176,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         saveArticles();
     }
+
+    // Función para abrir una noticia completa en una nueva ventana
+    const newsItems = document.querySelectorAll('.side-news .news-item');
+
+    newsItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const title = item.querySelector('.news-title').textContent;
+            const imageSrc = item.querySelector('img').src;
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <html>
+                <head><title>${title}</title></head>
+                <body>
+                    <h1>${title}</h1>
+                    <img src="${imageSrc}" alt="${title}">
+                    <p>Contenido completo de la noticia...</p>
+                </body>
+                </html>
+            `);
+        });
+    });
 });
