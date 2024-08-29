@@ -24,31 +24,19 @@
             <div class="main-news">
                 <img src="images/estrategias.jpeg" alt="Nuevas Estrategias de Aprendizaje en Jardines de Infancia" class="news-image">
                 <h3 class="news-title">Nuevas Estrategias de Aprendizaje en Jardines de Infancia: ¿Qué Esperar en 2024?</h3>
-                <div class="news-content" style="display:none;">
-                    <p>Con la introducción de tecnologías educativas innovadoras, los jardines de infancia están experimentando un cambio sin precedentes en sus métodos de enseñanza. Desde aplicaciones interactivas hasta el uso de robots educativos, exploramos cómo estas herramientas están transformando el aprendizaje temprano.</p>
-                </div>
             </div>
             <div class="side-news">
                 <div class="news-item">
                     <img src="images/coco.jpeg" alt="El Juego Libre como Herramienta Educativa" class="news-image">
                     <h3 class="news-title">El Juego Libre como Herramienta Educativa: Expertos Reafirman su Importancia</h3>
-                    <div class="news-content" style="display:none;">
-                        <p>En un mundo cada vez más estructurado, los expertos en desarrollo infantil están haciendo un llamado para revalorizar el juego libre en la educación temprana. Estudios recientes muestran que este tipo de juego fomenta la creatividad y la resolución de problemas en los niños.</p>
-                    </div>
                 </div>
                 <div class="news-item">
                     <img src="images/libre.jpeg" alt="La Educación Emocional en la Primera Infancia" class="news-image">
                     <h3 class="news-title">La Educación Emocional en la Primera Infancia: Clave para el Éxito Futuro</h3>
-                    <div class="news-content" style="display:none;">
-                        <p>Incorporar la educación emocional en los primeros años de vida se ha convertido en una prioridad para muchos educadores. Programas innovadores están enseñando a los niños a reconocer y manejar sus emociones, preparándolos mejor para los desafíos de la vida.</p>
-                    </div>
                 </div>
                 <div class="news-item">
                     <img src="images/aula.jpeg" alt="Cómo la Naturaleza Está Volviendo a las Aulas" class="news-image">
                     <h3 class="news-title">Cómo la Naturaleza Está Volviendo a las Aulas: El Auge de los Espacios Verdes en las Escuelas</h3>
-                    <div class="news-content" style="display:none;">
-                        <p>Los espacios verdes en las escuelas están cobrando fuerza como un recurso educativo vital. Cada vez más instituciones están incorporando jardines y áreas naturales donde los niños pueden aprender sobre el medio ambiente mientras desarrollan habilidades motoras y cognitivas.</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -61,6 +49,13 @@
 
         <section id="submit" class="submit-section">
             <h2>Escribe para Nosotros</h2>
+            <button id="toggleForm">Redactar Artículo</button>
+        </section>
+    </main>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
             <form id="article-form">
                 <label for="title">Título:</label>
                 <input type="text" id="title" name="title" required>
@@ -76,15 +71,6 @@
 
                 <button type="submit">Publicar Artículo</button>
             </form>
-        </section>
-    </main>
-
-    <div id="newsModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <img id="modalImage" src="" alt="Noticia Imagen" style="width: 100%; height: auto; margin-top: 10px;">
-            <p id="modalContent"></p>
         </div>
     </div>
 

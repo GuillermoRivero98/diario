@@ -4,12 +4,13 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
+    font-size: 14px;
 }
 
 header {
     background-color: #ffc107;
     color: black;
-    padding: 15px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,117 +18,96 @@ header {
 }
 
 header .logo img {
-    max-height: 50px;
+    max-height: 40px;
 }
 
 nav a {
-    margin: 0 15px;
+    margin: 0 10px;
     color: black;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.2em;
-}
-
-.intelligence-container {
-    position: relative;
-    max-width: 100%;
-}
-
-.intelligence-img {
-    width: 100%;
-    height: auto;
-    max-width: 800px; 
-    border-radius: 10px;
-}
-
-.intelligence-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1.5em; 
-    max-width: 90%;
+    font-size: 1em;
 }
 
 .news-section {
     display: flex;
     padding: 20px;
     background-color: #fff;
+    gap: 20px;
 }
 
 .main-news {
-    flex: 2;
+    flex: 3;
     margin-right: 0px;
     position: relative;
+    max-width: 50%; /* Reducir a la mitad el tamaño */
 }
 
 .main-news img {
     width: 100%;
     height: auto;
-    max-width: 100%; 
     border-radius: 10px;
 }
 
-.main-news-content {
+.main-news .news-title {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom: 10px;
+    left: 20px;
     color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    border-radius: 0 0 10px 10px; 
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.8em; /* Tamaño del texto ajustado */
+    width: calc(100% - 40px); /* Para que el texto no sobresalga de la imagen */
+    box-sizing: border-box; /* Asegurar que el padding no afecte el ancho */
 }
 
-.main-news-content h1 {
-    font-size: 2em;
-    margin: 0;
-}
-
-.main-news-content p {
-    font-size: 1em;
-    margin: 10px 0;
-}
-
-.main-news-content span {
-    font-size: 0.9em;
-    display: block;
-    margin-top: 10px;
-    color: #ccc;
-}
 
 .side-news {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 15px; 
-    margin-left: 20px; 
+    gap: 15px;
 }
 
-.news-item {
+.side-news .news-item {
     display: flex;
-    flex-direction: column;
-    cursor: pointer;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.news-item img {
-    width: 100%;
-    height: auto;
+.side-news .news-item img {
+    width: 64px;
+    height: 64px;
+    border-radius: 5px;
+    flex-shrink: 0;
 }
 
-.news-title {
-    font-size: 1.1em;
-    margin: 10px 0;
+.side-news .news-title {
+    margin-left: 10px;
+    font-size: 0.9em;
     color: black;
 }
 
+.articles-section,
+.submit-section {
+    text-align: center;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 1.1em;
+}
+
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -139,18 +119,20 @@ nav a {
 }
 
 .modal-content {
-    background-color: #fff;
-    margin: 5% auto;
+    background-color: #f7f7f7;
+    margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 2px solid #e0a800;
     width: 80%;
-    max-width: 800px;
+    max-width: 500px;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Añade sombra para profundidad */
+    animation: fadeIn 0.5s ease; /* Animación para que aparezca suavemente */
 }
 
 .close {
-    color: #aaa;
+    color: #e74c3c;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -159,80 +141,15 @@ nav a {
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: #c0392b;
     text-decoration: none;
     cursor: pointer;
-}
-
-.articles-section {
-    padding: 40px 20px;
-    background-color: #fff;
-}
-
-.articles-section h2 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-}
-
-#articles-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.article {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.article img {
-    width: 100%;
-    height: auto;
-}
-
-.article h3 {
-    font-size: 1.8em;
-    margin: 15px;
-    color: #333;
-}
-
-.article p {
-    font-size: 1.2em;
-    margin: 15px;
-    color: #666;
-}
-
-.article small {
-    margin: 15px;
-    color: gray;
-    display: block;
-    font-style: italic;
-}
-
-.submit-section {
-    padding: 40px 20px;
-    background-color: #f7f7f7;
-    border-top: 2px solid #e0e0e0;
-}
-
-.submit-section h2 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    text-align: center;
-    color: #333;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -244,23 +161,46 @@ input, textarea, button {
     border: 1px solid #ccc;
 }
 
+input:focus, textarea:focus {
+    border-color: #3498db; /* Cambiar el color del borde al enfocarse */
+    outline: none;
+}
+
 button {
-    background-color: #ffc107;
-    color: black;
+    background-color: #e67e22;
+    color: white;
     border: none;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s ease; /* Transición suave del color */
 }
 
 button:hover {
-    background-color: #e0a800;
+    background-color: #d35400;
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+label {
     font-size: 1.1em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Animación para la aparición del modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
