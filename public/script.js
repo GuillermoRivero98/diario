@@ -34,14 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = document.getElementById("title").value;
         const author = document.getElementById("author").value;
         const content = document.getElementById("content").value;
-        const image = document.getElementById("image").files[0]; // Aquí se usa "image"
+        const image = document.getElementById("image").files[0]; 
 
         if (!title || !author || !content) {
             alert("Por favor, rellena todos los campos");
             return;
         }
 
-        // Validación de la imagen con "image"
         if (image && image.size > 2 * 1024 * 1024) {
             alert("La imagen no puede pesar más de 2MB");
             return;
@@ -59,15 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
         articles.push(article);
         localStorage.setItem('articles', JSON.stringify(articles));
 
-        // Renderizar el artículo en la página
         renderArticle(article);
 
-        // Cerrar el modal y limpiar el formulario
         formModal.style.display = "none";
         articleForm.reset();
     });
 
-    // Renderizar artículo
     function renderArticle(article) {
         const articleElement = document.createElement("div");
         articleElement.classList.add("article");
@@ -117,28 +113,24 @@ document.addEventListener('DOMContentLoaded', function() {
         articleElement.appendChild(buttonContainer);
         articlesContainer.appendChild(articleElement);
 
-        // Botón de "me gusta"
         likeButton.addEventListener('click', function() {
             article.likes++;
             likeButton.textContent = `👍 ${article.likes}`;
             saveArticles();
         });
 
-        // Botón de "no me gusta"
         dislikeButton.addEventListener('click', function() {
             article.dislikes++;
             dislikeButton.textContent = `👎 ${article.dislikes}`;
             saveArticles();
         });
 
-        // Botón de borrar
         deleteButton.addEventListener('click', function() {
             articlesContainer.removeChild(articleElement);
             articles = articles.filter(a => a !== article);
             saveArticles();
         });
 
-        // Botón de editar
         editButton.addEventListener('click', function() {
             editArticle(article, h3Element, smallElement, pElement, articleElement.querySelector('img'));
         });
@@ -189,7 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
         saveArticles();
     }
 
-    // Función para abrir una noticia completa en una nueva ventana
     const newsItems = document.querySelectorAll('.side-news .news-item');
 
     newsItems.forEach(item => {
