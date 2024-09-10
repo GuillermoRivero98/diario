@@ -5,29 +5,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const articleForm = document.getElementById("article-form");
     const articlesContainer = document.getElementById("articles-container");
 
-    let articles = JSON.parse(localStorage.getItem('articles')) || [];
+    // Cargar los artículos desde el servidor
+    fetch('/api/articles')
+        .then(response => response.json())
+        .then(articles => {
+            articles.forEach(article => renderArticle(article));
+        })
+        .catch(err => console.error("Error al obtener los artículos:", err));
 
-    // Mostrar los artículos guardados
-    articles.forEach(article => renderArticle(article));
-
-    // Mostrar el formulario en un pop-up
     toggleFormButton.addEventListener('click', function() {
         formModal.style.display = "block";
     });
 
-    // Cerrar el formulario pop-up
     closeModal.onclick = function() {
         formModal.style.display = "none";
     };
 
-    // Cerrar el formulario si se hace clic fuera del contenido del modal
     window.onclick = function(event) {
-        if (event.target == formModal) {
+        if(event.target == formModal) {
             formModal.style.display = "none";
         }
     };
 
-    // Manejar el envío del formulario
+    // Crear un nuevo artículo
     articleForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -55,13 +55,21 @@ document.addEventListener('DOMContentLoaded', function() {
             dislikes: 0
         };
 
-        articles.push(article);
-        localStorage.setItem('articles', JSON.stringify(articles));
-
-        renderArticle(article);
-
-        formModal.style.display = "none";
-        articleForm.reset();
+        // Enviar el artículo al servidor (POST)
+        fetch('/api/articles', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(article)
+        })
+        .then(response => response.json())
+        .then(newArticle => {
+            renderArticle(newArticle); // Renderizar el nuevo artículo
+            formModal.style.display = "none";
+            articleForm.reset();
+        })
+        .catch(err => console.error("Error al crear artículo:", err));
     });
 
     function renderArticle(article) {
@@ -113,31 +121,46 @@ document.addEventListener('DOMContentLoaded', function() {
         articleElement.appendChild(buttonContainer);
         articlesContainer.appendChild(articleElement);
 
+        // Manejar "me gusta" y "no me gusta"
         likeButton.addEventListener('click', function() {
             article.likes++;
             likeButton.textContent = `👍 ${article.likes}`;
-            saveArticles();
+            updateArticle(article); // Actualizar el artículo en el servidor
         });
 
         dislikeButton.addEventListener('click', function() {
             article.dislikes++;
             dislikeButton.textContent = `👎 ${article.dislikes}`;
-            saveArticles();
+            updateArticle(article); // Actualizar el artículo en el servidor
         });
 
+        // Manejar eliminación de artículos
         deleteButton.addEventListener('click', function() {
-            articlesContainer.removeChild(articleElement);
-            articles = articles.filter(a => a !== article);
-            saveArticles();
+            fetch(`/api/articles/${article.id}`, {
+                method: 'DELETE',
+            })
+            .then(() => {
+                articlesContainer.removeChild(articleElement);
+            })
+            .catch(err => console.error("Error al eliminar artículo:", err));
         });
 
+        // Manejar edición de artículos
         editButton.addEventListener('click', function() {
             editArticle(article, h3Element, smallElement, pElement, articleElement.querySelector('img'));
         });
     }
 
-    function saveArticles() {
-        localStorage.setItem('articles', JSON.stringify(articles));
+    function updateArticle(article) {
+        fetch(`/api/articles/${article.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(article)
+        })
+        .then(response => response.json())
+        .catch(err => console.error("Error al actualizar artículo:", err));
     }
 
     function editArticle(article, titleElement, authorElement, contentElement, imgElement) {
@@ -159,26 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
             contentElement.textContent = newContent.trim();
         }
 
-        if (imgElement) {
-            const changeImage = confirm("¿Quieres cambiar la imagen?");
-            if (changeImage) {
-                const input = document.createElement("input");
-                input.type = "file";
-                input.accept = "image/*";
-                input.onchange = function() {
-                    const file = input.files[0];
-                    if (file && file.size <= 2 * 1024 * 1024) {
-                        const imageUrl = URL.createObjectURL(file);
-                        article.image = imageUrl;
-                        imgElement.src = imageUrl;
-                    } else {
-                        alert("La imagen no puede pesar más de 2MB");
-                    }
-                };
-                input.click();
-            }
-        }
-        saveArticles();
+        updateArticle(article);
     }
 
     const newsItems = document.querySelectorAll('.side-news .news-item');
