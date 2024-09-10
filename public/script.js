@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const articleForm = document.getElementById("article-form");
     const articlesContainer = document.getElementById("articles-container");
 
-    // Cargar los artículos desde el servidor
     fetch('/api/articles')
         .then(response => response.json())
         .then(articles => {
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Crear un nuevo artículo
     articleForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -37,12 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const image = document.getElementById("image").files[0]; 
 
         if (!title || !author || !content) {
-            alert("Por favor, rellena todos los campos");
+            alert("Por favor, rellena todos los campos.");
             return;
         }
 
         if (image && image.size > 2 * 1024 * 1024) {
-            alert("La imagen no puede pesar más de 2MB");
+            alert("La imagen no puede pesar más de 2MB.");
             return;
         }
 
@@ -50,12 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
             title: title,
             author: author,
             content: content,
-            image: image ? URL.createObjectURL(image) : null,
+            image: image ? URL.createObjectURL(image) : null, 
             likes: 0,
             dislikes: 0
         };
 
-        // Enviar el artículo al servidor (POST)
         fetch('/api/articles', {
             method: 'POST',
             headers: {
@@ -63,13 +60,22 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(article)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.error);
+                });
+            }
+            return response.json();
+        })
         .then(newArticle => {
-            renderArticle(newArticle); // Renderizar el nuevo artículo
+            renderArticle(newArticle); 
             formModal.style.display = "none";
             articleForm.reset();
         })
-        .catch(err => console.error("Error al crear artículo:", err));
+        .catch(err => {
+            alert("Error al crear artículo: " + err.message); 
+        });
     });
 
     function renderArticle(article) {
@@ -121,20 +127,18 @@ document.addEventListener('DOMContentLoaded', function() {
         articleElement.appendChild(buttonContainer);
         articlesContainer.appendChild(articleElement);
 
-        // Manejar "me gusta" y "no me gusta"
         likeButton.addEventListener('click', function() {
             article.likes++;
             likeButton.textContent = `👍 ${article.likes}`;
-            updateArticle(article); // Actualizar el artículo en el servidor
+            updateArticle(article); 
         });
 
         dislikeButton.addEventListener('click', function() {
             article.dislikes++;
             dislikeButton.textContent = `👎 ${article.dislikes}`;
-            updateArticle(article); // Actualizar el artículo en el servidor
+            updateArticle(article); 
         });
 
-        // Manejar eliminación de artículos
         deleteButton.addEventListener('click', function() {
             fetch(`/api/articles/${article.id}`, {
                 method: 'DELETE',
@@ -145,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(err => console.error("Error al eliminar artículo:", err));
         });
 
-        // Manejar edición de artículos
         editButton.addEventListener('click', function() {
             editArticle(article, h3Element, smallElement, pElement, articleElement.querySelector('img'));
         });
