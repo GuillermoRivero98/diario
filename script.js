@@ -7,27 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let articles = JSON.parse(localStorage.getItem('articles')) || [];
 
-    // Mostrar los artículos guardados
     articles.forEach(article => renderArticle(article));
 
-    // Mostrar el formulario en un pop-up
     toggleFormButton.addEventListener('click', function() {
         formModal.style.display = "block";
     });
 
-    // Cerrar el formulario pop-up
     closeModal.onclick = function() {
         formModal.style.display = "none";
     };
 
-    // Cerrar el formulario si se hace clic fuera del contenido del modal
     window.onclick = function(event) {
         if (event.target == formModal) {
             formModal.style.display = "none";
         }
     };
 
-    // Manejar el envío del formulario
     articleForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -36,7 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = document.getElementById("content").value;
         const image = document.getElementById("image").files[0];
 
-        // Crear un nuevo artículo
+        if(!title || !author || !content) {
+            alert("Por favor, rellena todos los campos");
+            return;
+        }
+
+        if(imageInput && imageInput.size >2*1024*1024){
+            alert("La imagen no puede pesar más de 2MB");
+            return;
+        }
+
         const article = {
             title: title,
             author: author,
@@ -49,15 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
         articles.push(article);
         localStorage.setItem('articles', JSON.stringify(articles));
 
-        // Renderizar el artículo en la página
         renderArticle(article);
 
-        // Cerrar el modal y limpiar el formulario
         formModal.style.display = "none";
         articleForm.reset();
     });
 
-    // Renderizar artículo
     function renderArticle(article) {
         const articleElement = document.createElement("div");
         articleElement.classList.add("article");
@@ -107,28 +108,24 @@ document.addEventListener('DOMContentLoaded', function() {
         articleElement.appendChild(buttonContainer);
         articlesContainer.appendChild(articleElement);
 
-        // Botón de "me gusta"
         likeButton.addEventListener('click', function() {
             article.likes++;
             likeButton.textContent = `👍 ${article.likes}`;
             saveArticles();
         });
 
-        // Botón de "no me gusta"
         dislikeButton.addEventListener('click', function() {
             article.dislikes++;
             dislikeButton.textContent = `👎 ${article.dislikes}`;
             saveArticles();
         });
 
-        // Botón de borrar
         deleteButton.addEventListener('click', function() {
             articlesContainer.removeChild(articleElement);
             articles = articles.filter(a => a !== article);
             saveArticles();
         });
 
-        // Botón de editar
         editButton.addEventListener('click', function() {
             editArticle(article, h3Element, smallElement, pElement, articleElement.querySelector('img'));
         });
@@ -140,35 +137,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function editArticle(article, titleElement, authorElement, contentElement, imgElement) {
         const newTitle = prompt("Editar título:", article.title);
-        if (newTitle !== null) {
-            article.title = newTitle;
-            titleElement.textContent = newTitle;
+        if (newTitle !== null && newTitle.trim() !== "") {
+            article.title = newTitle.trim();
+            titleElement.textContent = newTitle.trim();
         }
 
         const newAuthor = prompt("Editar autor:", article.author);
-        if (newAuthor !== null) {
-            article.author = newAuthor;
-            authorElement.textContent = "Por " + newAuthor;
+        if (newAuthor !== null && newAuthor.trim() !== "") {
+            article.author = newAuthor.trim();
+            authorElement.textContent = "Por " + newAuthor.trim();
         }
 
         const newContent = prompt("Editar contenido:", article.content);
-        if (newContent !== null) {
-            article.content = newContent;
-            contentElement.textContent = newContent;
+        if (newContent !== null && newContent.trim() !== "") {
+            article.content = newContent.trim();
+            contentElement.textContent = newContent.trim();
         }
 
         if (imgElement) {
-            const newImage = confirm("¿Quieres cambiar la imagen?");
-            if (newImage) {
+            const changeImage = confirm("¿Quieres cambiar la imagen?");
+            if (changeImageImage) {
                 const input = document.createElement("input");
                 input.type = "file";
                 input.accept = "image/*";
                 input.onchange = function() {
                     const file = input.files[0];
-                    if (file) {
+                    if (file && file.size <= 2*1024*1024) {
                         const imageUrl = URL.createObjectURL(file);
                         article.image = imageUrl;
                         imgElement.src = imageUrl;
+                    }else{
+                        alert("La imagen no puede pesar más de 2MB");
                     }
                 };
                 input.click();
@@ -177,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
         saveArticles();
     }
 
-    // Función para abrir una noticia completa en una nueva ventana
     const newsItems = document.querySelectorAll('.side-news .news-item');
 
     newsItems.forEach(item => {

@@ -248,16 +248,64 @@ label {
     }
 }
 
+/* Ajustes añadidos para pantallas móviles */
 @media (max-width: 480px) {
+    .news-section {
+        padding: 10px;
+    }
+
     .side-news .news-item {
         flex-basis: 100%;
+        padding: 10px;
+    }
+
+    .main-news img,
+    .side-news img {
+        width: 100%;
+        height: auto;
     }
 
     nav a {
-        font-size: 0.9em;
+        font-size: 0.85em;
     }
 
-    .main-news .news-title {
+    .main-news .news-title,
+    .side-news .news-title {
         font-size: 1.2em;
     }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 1em;
+    }
+}
+
+/* Mejoras generales para UX */
+button {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+}
+
+/* Mensajes de confirmación o éxito */
+.success-message {
+    color: green;
+    font-size: 1.1em;
+    margin-top: 10px;
+    display: none; /* Mostrar cuando sea necesario */
+}
+
+.error-message {
+    color: red;
+    font-size: 1.1em;
+    margin-top: 10px;
+    display: none; /* Mostrar cuando sea necesario */
 }
