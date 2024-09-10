@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import errorHandler from "./middlewares/error-handler.mjs";
 import { requestLogger } from "./middlewares/request-logger.mjs";
-import tasksRouter from "./routes/tasks.mjs";
+import articlesRouter from "./routes/articles.mjs";
 import cors from "cors";
 import path from "path";
 
@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 })
 
 
-app.use("/api", tasksRouter);
+app.use("/api", articlesRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
