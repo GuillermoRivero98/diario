@@ -113,7 +113,6 @@ footer {
     font-size: 1.1em;
 }
 
-/* Estilos para el pop-up */
 .modal {
     display: none;
     position: fixed;
@@ -193,7 +192,6 @@ label {
     margin-bottom: 5px;
 }
 
-/* Animación para la aparición del modal */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -205,7 +203,6 @@ label {
     }
 }
 
-/* Media Queries para hacer la página responsiva */
 @media (min-width: 769px) {
     .news-section {
         flex-direction: row;
@@ -248,7 +245,6 @@ label {
     }
 }
 
-/* Ajustes añadidos para pantallas móviles */
 @media (max-width: 480px) {
     .news-section {
         padding: 10px;
@@ -284,7 +280,6 @@ label {
     }
 }
 
-/* Mejoras generales para UX */
 button {
     transition: all 0.3s ease;
     cursor: pointer;
@@ -295,17 +290,16 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Mensajes de confirmación o éxito */
 .success-message {
     color: green;
     font-size: 1.1em;
     margin-top: 10px;
-    display: none; /* Mostrar cuando sea necesario */
+    display: none; 
 }
 
 .error-message {
     color: red;
     font-size: 1.1em;
     margin-top: 10px;
-    display: none; /* Mostrar cuando sea necesario */
+    display: none; 
 }
